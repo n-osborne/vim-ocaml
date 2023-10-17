@@ -91,10 +91,9 @@ syn region   ocamlComment keepend start="(\*" end="\*)" contains=@Spell,ocamlCom
 syn keyword  ocamlTodo contained TODO FIXME XXX NOTE
 
 " Gospel
-syn region  ocamlGospel transparent start="(\*@" end="\*)" contains=@Spell,ocamlGospelKw,ocamlGospelConst,ocamlGospelQuantifier,ocamlGospelInfix,ocamlArrow,ocamlGospelDoubleArrow,ocamlGospelType,ocamlKeyword,ocamlFun,ocamlCons,ocamlComment
+syn region  ocamlGospel transparent start="(\*@" end="\*)" contains=@Spell,ocamlGospelKw,ocamlGospelQuantifier,ocamlGospelInfix,ocamlGospelDoubleArrow,ocamlGospelType,ocamlComment,ocamlNone
 syn keyword ocamlGospelKw contained ensures checks requires raises modifies
 syn keyword ocamlGospelKw contained mutable model invariants ephemeral
-syn keyword ocamlGospelConst contained true false
 syn keyword ocamlGospelQuantifier contained forall exists
 syn keyword ocamlGospelType contained list array integer int bool prop sequence
 syn match   ocamlGospelDoubleArrow "<->"

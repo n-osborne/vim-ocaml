@@ -102,6 +102,11 @@ else
   syn region   ocamlCommentInDoc start="(\*" end="\*)" contains=@Spell,ocamlTodo,ocamlCommentInDoc
 endif
 
+" Gospel special comments
+syn include @ocamlGospel syntax/gospel.vim
+syn region ocamlGospelComment start="(\*@" end="\*)" contains=@ocamlGospel
+hi def link ocamlGospelComment Comment
+
 " Objects
 syn region   ocamlEnd matchgroup=ocamlObject start="\<object\>" matchgroup=ocamlObject end="\<end\>" contains=ALLBUT,@ocamlContained,ocamlEndErr
 
@@ -487,7 +492,7 @@ hi link ocamlTypeSumAnnot ocamlTypeCatchAll
 syn region ocamlTypeDef
 \ matchgroup=ocamlKeyword start="\<type\>\(\_s\+\<nonrec\>\)\?\|\<constraint\>\|\<exception\>"
 \ matchgroup=NONE end="\(\<type\>\|\<exception\>\|\<val\>\|\<module\>\|\<class\>\|\<method\>\|\<constraint\>\|\<inherit\>\|\<object\>\|\<struct\>\|\<open\>\|\<include\>\|\<let\>\|\<external\>\|\<in\>\|\<end\>\|)\|]\|}\|;\|;;\)\@="
-\ contains=@ocamlTypeExpr,ocamlTypeEq,ocamlTypePrivate,ocamlTypeDefDots,ocamlTypeRecordDecl,ocamlTypeSumDecl,ocamlTypeDefAnd,@ocamlCommentLike,ocamlPpx
+\ contains=@ocamlTypeExpr,ocamlTypeEq,ocamlTypePrivate,ocamlTypeDefDots,ocamlTypeRecordDecl,ocamlTypeSumDecl,ocamlTypeDefAnd,@ocamlCommentLike,ocamlPpx,ocamlGospelComment
 hi link ocamlTypeDef ocamlTypeCatchAll
 syn cluster ocamlTypeContained add=ocamlTypePrivate
 syn keyword ocamlTypePrivate contained private
@@ -513,7 +518,7 @@ syn region ocamlTypeAnnot matchgroup=ocamlKeyChar start=":\(>\|\_s*type\>\|[>:=]
 \ matchgroup=NONE end="\(\<type\>\|\<exception\>\|\<val\>\|\<module\>\|\<class\>\|\<method\>\|\<constraint\>\|\<inherit\>\|\<object\>\|\<struct\>\|\<open\>\|\<include\>\|\<let\>\|\<external\>\|\<in\>\|\<end\>\|)\|]\|}\|;\|;;\)\@="
 \ matchgroup=NONE end="\(;\|}\)\@="
 \ matchgroup=NONE end="\(=\|:>\)\@="
-\ contains=@ocamlTypeExpr,@ocamlCommentLike,ocamlPpx
+\ contains=@ocamlTypeExpr,@ocamlCommentLike,ocamlPpx,ocamlGospelComment
 hi link ocamlTypeAnnot ocamlTypeCatchAll
 
 " Type annotation that gives the return type of a `fun` keyword

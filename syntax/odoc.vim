@@ -25,7 +25,7 @@ syn case match
 syn include @odocSyntaxOCaml syntax/ocaml.vim
 unlet b:current_syntax
 
-syn cluster odocInline contains=odocBold,odocItalic,odocEmphasis,odocMiscInline,odocList,odocLinkText,odocUrl,odocBraceError,odocCode,odocCrossref,odocCodeBlock,odocVerbatim,odocTargetSpecific,odocTag
+syn cluster odocInline contains=odocBold,odocItalic,odocEmphasis,odocMiscInline,odocList,odocLinkText,odocUrl,odocCrossref,odocCode,odocCodeBlock,odocVerbatim,odocTargetSpecific,odocTag,odocEscaped,odocEscapedError,odocBraceError,odocTagError
 
 syn match odocBraceError "[{}]"
 
@@ -57,7 +57,9 @@ syn region odocTable matchgroup=odocMarker start="{t\>" end="}" contains=@Spell,
 syn region odocTable matchgroup=odocMarker start="{table\>" end="}" contains=odocTableRow
 syn region odocTableRow matchgroup=odocMarker start="{tr\>"  end="}" contains=odocTableEntry
 syn region odocTableEntry matchgroup=odocMarker start="{t[dh]\>"  end="}" contains=@Spell,@odocInline
-syn region odocCode matchgroup=odocMarker start="\[" end="\]"
+syn match odocEscapedBracket contained "\\[][]"
+syn region odocBalancedBracket contained start="\[" end="]"
+syn region odocCode matchgroup=odocMarker start="\[" end="\]" contains=odocBalancedBracket,odocEscapedBracket
 syn region odocCodeBlock matchgroup=odocMarker start="{@[^\[]\+\[" end="\]}"
 syn region odocCodeBlock matchgroup=odocMarker start="{\%(@ocaml\%(\s[^\[]*\)\?\)\?\[" end="\]}" contains=@odocSyntaxOCaml
 syn match odocListMarker "^\s*[-+]\s"
@@ -65,25 +67,35 @@ syn region odocListItem contained matchgroup=odocListMarker start="{\%(-\|li\>\)
 syn region odocList matchgroup=odocListMarker start="{[ou]l\>" end="}" contains=odocListItem
 " a bit leniant with ":"
 syn match odocCrossrefKw contained "\<\%(module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|field\|instance-variable\|section\|page\)[-:]"
-syn region odocCrossref start="{!" end="}" contains=odocCrossrefKw
-syn match odocTag "@\%(author\|deprecated\|param\|raise\|return\|see\|since\|before\|version\)"
+syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw
+syn match odocTagError "@[a-zA-Z]*"
+syn match odocTag "@\%(author\|deprecated\|param\|raise\|return\|see\|since\|before\|version\)\>"
+
+syn match odocEscapedError "\\."
+syn match odocEscaped "\\[][{}@\\]"
 
 " Shamelessly borrowed from HTML syntax
 hi def odocBold     term=bold cterm=bold gui=bold
 hi def odocEmphasis term=underline cterm=underline gui=underline
 hi def odocItalic   term=italic cterm=italic gui=italic
 
-hi def link odocCrossref Float
+hi def link odocUrlMarker odocMarker
+hi def link odocUrl Underlined
+hi def link odocCrossrefMarker odocCrossref    " or odocMarker
+hi def link odocCrossref Label
 hi def link odocCrossrefKw Keyword
 hi def link odocHeading Title
 hi def link odocHeadingLabel Label
 hi def link odocListMarker Operator
 hi def link odocMarker Delimiter
 hi def link odocTag Keyword
+
 hi def link odocBraceError Error
-hi def link odocUrlMarker odocMarker
-hi def link odocUrl Underlined
 hi def link odocUnknownTarget Error
+hi def link odocTagError Error
+hi def link odocEscapedError Error
+hi def link odocEscaped SpecialChar
+hi def link odocEscapedBracket odocEscaped
 
 let b:current_syntax = "odoc"
 

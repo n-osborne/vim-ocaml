@@ -66,8 +66,9 @@ syn match odocListMarker "^\s*[-+]\s"
 syn region odocListItem contained matchgroup=odocListMarker start="{\%(-\|li\>\)" end="}" contains=@Spell,@odocInline
 syn region odocList matchgroup=odocListMarker start="{[ou]l\>" end="}" contains=odocListItem
 " a bit leniant with ":"
-syn match odocCrossrefKw contained "\<\%(module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|field\|instance-variable\|section\|page\)[-:]"
-syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw
+syn match odocCrossrefKw contained "\<\%(!modules\|module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|extension-decl\|field\|instance-variable\|section\|page\)[-:]"
+syn match odocCrossrefKwDeprecated contained "\<\%(modtype\|classtype\|value\|exn\|const\|label\)[-:]"
+syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw,odocCrossrefKwDeprecated
 syn match odocTagError "@[a-zA-Z]*"
 syn match odocTag "@\%(author\|deprecated\|param\|raises\?\|returns\?\|see\|since\|before\|version\|open\|closed\|inline\|canonical\)\>"
 
@@ -84,6 +85,7 @@ hi def link odocUrl Underlined
 hi def link odocCrossrefMarker odocCrossref    " or odocMarker
 hi def link odocCrossref Label
 hi def link odocCrossrefKw Keyword
+hi def link odocCrossrefKwDeprecated Keyword   " we may highlight it differently
 hi def link odocHeading Title
 hi def link odocHeadingLabel Label
 hi def link odocListMarker Operator

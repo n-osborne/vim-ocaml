@@ -50,7 +50,7 @@ endif
 
 syn region odocDyckWord contained start="{" end="}" contains=odocDyckWord
 syn region odocTargetSpecific matchgroup=odocMarker start="{m\%(ath\)\?\>" end="}" contains=odocDyckWord
-syn region odocTargetSpecific matchgroup=odocMarker start="{%\%(latex\|texi\|man\):" end="%}" contains=@Spell
+syn region odocTargetSpecific matchgroup=odocMarker start="{%\%(latex\|texi\|man\):" end="%}"
 syn region odocHeading start="{[0-5]\%(\s\|$\|:\)\@=" end="}" contains=@Spell,odocHeadingLabel
 syn match odocHeadingLabel contained "\%({[0-5]\)\@<=:[^ \t:]*"
 syn region odocTable matchgroup=odocMarker start="{t\>" end="}" contains=@Spell,@odocInline

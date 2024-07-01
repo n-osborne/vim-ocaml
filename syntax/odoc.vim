@@ -31,6 +31,10 @@ syn match odocBraceError "[{}]"
 
 syn region odocLinkText transparent matchgroup=odocMarker start="{\%({[!:]\)\@=" end="}" contains=odocUrl,odocCrossref,@Spell,@odocInline
 syn region odocUrl matchgroup=odocUrlMarker start="{:\_s*" end="\_s*}"
+" a bit leniant with ":"
+syn match odocCrossrefKw contained "\<\%(!modules\|module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|extension-decl\|field\|instance-variable\|section\|page\)[-:]"
+syn match odocCrossrefKwDeprecated contained "\<\%(modtype\|classtype\|value\|exn\|const\|label\)[-:]"
+syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw,odocCrossrefKwDeprecated
 
 syn region odocBold matchgroup=odocMarker start="{b\>" end="}" contains=@Spell,@odocInline
 syn region odocEmphasis matchgroup=odocMarker start="{e\>" end="}" contains=@Spell,@odocInline
@@ -65,10 +69,6 @@ syn region odocCodeBlock matchgroup=odocMarker start="{\%(@ocaml\%(\s[^\[]*\)\?\
 syn match odocListMarker "^\s*[-+]\s"
 syn region odocListItem contained transparent matchgroup=odocListMarker start="{\%(-\|li\>\)" end="}" contains=@Spell,@odocInline
 syn region odocList transparent matchgroup=odocListMarker start="{[ou]l\>" end="}" contains=odocListItem
-" a bit leniant with ":"
-syn match odocCrossrefKw contained "\<\%(!modules\|module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|extension-decl\|field\|instance-variable\|section\|page\)[-:]"
-syn match odocCrossrefKwDeprecated contained "\<\%(modtype\|classtype\|value\|exn\|const\|label\)[-:]"
-syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw,odocCrossrefKwDeprecated
 syn match odocTagError "@[a-zA-Z]*"
 syn match odocTag "@\%(author\|deprecated\|param\|raises\?\|returns\?\|see\|since\|before\|version\|open\|closed\|inline\|canonical\)\>"
 

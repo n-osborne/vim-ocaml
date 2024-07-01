@@ -69,7 +69,7 @@ syn region odocList matchgroup=odocListMarker start="{[ou]l\>" end="}" contains=
 syn match odocCrossrefKw contained "\<\%(module\%(-type\)\?\|class\%(-type\)\?\|val\|type\|exception\|method\|constructor\|extension\|field\|instance-variable\|section\|page\)[-:]"
 syn region odocCrossref matchgroup=odocCrossrefMarker start="{!" end="}" contains=odocCrossrefKw
 syn match odocTagError "@[a-zA-Z]*"
-syn match odocTag "@\%(author\|deprecated\|param\|raise\|return\|see\|since\|before\|version\)\>"
+syn match odocTag "@\%(author\|deprecated\|param\|raises\?\|returns\?\|see\|since\|before\|version\|open\|closed\|inline\|canonical\)\>"
 
 syn match odocEscapedError "\\."
 syn match odocEscaped "\\[][{}@\\]"

@@ -65,7 +65,7 @@ syn match odocEscapedBracket contained "\\[][]"
 syn region odocBalancedBracket contained transparent start="\[" end="]"
 syn region odocCode matchgroup=odocMarker start="\[" end="\]" contains=odocBalancedBracket,odocEscapedBracket
 syn region odocCodeBlock matchgroup=odocMarker start="{@[^\[]\+\[" end="\]}"
-syn region odocCodeBlock matchgroup=odocMarker start="{\%(@ocaml\%(\s[^\[]*\)\?\)\?\[" end="\]}" contains=@odocSyntaxOCaml
+syn region odocCodeBlock matchgroup=odocMarker start="{\%(@ocaml\%(\_s[^\[]*\)\?\)\?\[" end="\]}" contains=@odocSyntaxOCaml
 syn match odocListMarker "^\s*[-+]\s"
 syn region odocListItem contained transparent matchgroup=odocListMarker start="{\%(-\|li\>\)" end="}" contains=@Spell,@odocInline
 syn region odocList transparent matchgroup=odocListMarker start="{[ou]l\>" end="}" contains=odocListItem
